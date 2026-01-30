@@ -6,7 +6,7 @@ services:
     env_file:
       - .env
     environment:
-      DATABASE_URL: 'sqlite+aiosqlite:///db.sqlite3'
+      DATABASE_URL: 'db.sqlite3'
     expose:
       - "8000"
 
