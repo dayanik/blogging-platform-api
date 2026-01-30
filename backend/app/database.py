@@ -1,6 +1,7 @@
 from sqlalchemy import select
 
-import asyncio
+from contextlib import asynccontextmanager
+from fastapi import FastAPI
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, AsyncSession
 from app.config import DATABASE_URL
 from app.models import Post, PostRequest, Base
@@ -9,6 +10,13 @@ from app.models import Post, PostRequest, Base
 engine = create_async_engine(DATABASE_URL)
 
 async_session_maker = async_sessionmaker(engine, expire_on_commit=False)
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
+    yield
 
 
 # декоратор создания сессии
@@ -66,12 +74,3 @@ async def update_post_on_db(
         post.tags = data.tags
         await session.commit()
     return post
-
-
-async def init_db():
-    async with engine.begin() as conn:
-        await conn.run_sync(Base.metadata.create_all)
-
-
-if __name__ == "__main__":
-    asyncio.run(init_db())
