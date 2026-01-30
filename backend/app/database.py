@@ -25,9 +25,6 @@ def connection(method):
 	return wrapper
 
 
-engine = create_async_engine(DATABASE_URL, echo=True)
-
-
 @connection
 async def get_all_posts_from_db(session: AsyncSession) -> list[Post]:
     result = await session.execute(select(Post))
