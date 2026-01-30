@@ -32,6 +32,8 @@ COPY ./app ./app
 RUN --mount=type=cache,target=/root/.cache/uv \
     uv sync --locked
 
+CMD ["python3", "app/database.py"]
+
 WORKDIR /backend/app
 
 CMD ["fastapi", "run", "main.py", "--host", "0.0.0.0", "--port", "8000"]
