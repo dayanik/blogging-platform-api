@@ -2,12 +2,12 @@ from fastapi import FastAPI, status, Response, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 
-from app import database, lifespan
+from app import database
 from app.models import PostRequest
 
 
 # инициализация приложения с базой данных
-app = FastAPI(lifespan=lifespan)
+app = FastAPI(lifespan=database.lifespan)
 
 
 # общий обработчик исключения валидации длинной ссылки
