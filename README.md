@@ -36,13 +36,20 @@ docker-compose up -d --build
 **Пример ответа:**
 
 ```json
-{
-  "id": "1",
-  "url": "https://www.example.com/some/long/url",
-  "shortCode": "abc123",
-  "createdAt": "2021-09-01T12:00:00Z",
-  "updatedAt": "2021-09-01T12:00:00Z"
-}
+[
+  {
+    "post_id": 1,
+    "title": "My new Blog Post",
+    "content": "This is the content of my new blog post.",
+    "category": "Technology",
+    "tags": [
+      "Tech",
+      "Programming"
+    ],
+    "created_at": "2026-01-30T21:05:36",
+    "updated_at": "2026-01-30T21:05:36"
+  }
+]
 ```
 
 ---
